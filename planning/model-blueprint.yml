@@ -1,0 +1,29 @@
+
+v1
+-users:
+    email
+    username
+    password
+    threads
+-threads:
+    OP
+    posts
+    category
+-posts:
+    user
+    content
+    time created
+v2
+-users:
+    avatar #could use avatar generator api to give default
+    favorites #this may be the same thing as posts?
+    posts #does a user need posts?
+    accountcreated
+    last_login
+-threads:
+    TBD
+-posts:
+    show if edited
+v3
+user settings?
+staff accounts

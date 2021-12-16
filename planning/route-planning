@@ -1,0 +1,15 @@
+v1 routes:
+    user:
+        -user can log in-> return user + token
+        -user can log out=> return nothing
+        -user can sign up => returns logged in user and token
+        -user can change password => returns nothing or maybe a token
+    
+    thread
+        - a user can create a thread => returns thread or maybe thread id?
+        - a user can delete a threads original post leaving the rest of the rest of the thread
+    
+    post:
+        - a user can post
+        - a user can edit its own post
+        - a user can delete own post
