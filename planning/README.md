@@ -21,7 +21,7 @@ inlcuded in planning directory
 | Design site | m | 6 |  |
 | Styling | l | 2 |  |
 | Backend/Frontend connectivity | H | 3 | |
-| Total | H | 29 | 42.5 |
+| Total | H | 29 |  |
 
 ## Hurdles
 
