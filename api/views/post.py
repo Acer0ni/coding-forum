@@ -16,10 +16,7 @@ def get_post_by_thread_id(request,id:str):
 
 @router.post("/",response=PostSchemaOut)
 def create_post(request,new_post:PostSchemaIn):
-    
     user = User.objects.get(id=new_post.author)
-    print(user)
     current_thread = Thread.objects.get(id = new_post.thread)
     post = Post.objects.create(thread = current_thread,author= user,content= new_post.content )
-    print(current_thread)
-    return post
+    return current_thread

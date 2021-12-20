@@ -1,6 +1,5 @@
 from ninja import Router
-from api.models import User
-from api.models.thread import Thread
+from api.models import User,Post,Thread
 from api.schemas.thread import ThreadSchemaIn, ThreadSchemaOut
 from django.shortcuts import get_object_or_404
 from typing import List
@@ -17,7 +16,9 @@ def get_thread_by_id(request,id:str):
 
 @router.post("/",response=ThreadSchemaOut)
 def create_thread(request,new_thread:ThreadSchemaIn):
-    new_thread.author = get_object_or_404(User,id=new_thread.author)
-    thread = Thread.objects.create(**new_thread.dict())
+    author = get_object_or_404(User,id=new_thread.author)
+    thread = Thread.objects.create(author = author,category = new_thread.category,title=new_thread.title)
+    original_post = Post.objects.create(author = author,thread = thread,content= new_thread.content)
     thread.save()
+    original_post.save()
     return thread
