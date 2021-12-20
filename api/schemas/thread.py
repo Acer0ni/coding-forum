@@ -6,7 +6,7 @@ class ThreadSchemaOut(ModelSchema):
     class Config:
         model = Thread
         model_fields = [
-            "author","title",'category','original_post'
+            'id',"author","title",'category','original_post'
         ]
 class ThreadSchemaIn(ModelSchema):
     class Config:

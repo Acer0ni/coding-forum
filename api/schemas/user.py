@@ -2,8 +2,10 @@
 from typing import Optional
 from ninja import ModelSchema
 from api.models import User
+from api.models.thread import Thread
 
 class UserSchemaOut(ModelSchema):
+    
     class Config:
         model = User
         model_fields = [
