@@ -11,5 +11,4 @@ v1 routes:
     
     post:
         - a user can post
-        - a user can edit its own post
         - a user can delete own post
