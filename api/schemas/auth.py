@@ -4,6 +4,6 @@ from api.models.user import User
 
 
 class LoginSchema(Schema):
-    email:str
+    username:str
     password:str
         
