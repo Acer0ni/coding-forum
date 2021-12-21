@@ -1,17 +1,17 @@
-from typing import List 
+from typing import List,Optional 
 from ninja import ModelSchema
 from api.models.category import Category
 from api.schemas.thread import ThreadSchemaOut
 
 
 class CategorySchemaOut(ModelSchema):
-    threads:List[ThreadSchemaOut]
+    threads:Optional[List[ThreadSchemaOut]]
     class Config:
         model = Category
         model_fields = [
-            'id',"title",'description','threads'
+            'id',"title",'description'
         ]
-class ThreadSchemaIn(ModelSchema):
+class CategorySchemaIn(ModelSchema):
     class Config:
         model  = Category
         model_fields = [

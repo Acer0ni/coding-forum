@@ -1,3 +1,4 @@
+from typing import List
 from ninja import Router
 from api.models.post import Post
 from api.models.thread import Thread
@@ -6,13 +7,11 @@ from api.schemas.post import PostSchemaIn,PostSchemaOut
 
 router = Router(tags=["posts"])
 
-@router.get("/")
+@router.get("/",response=List[PostSchemaOut])
 def get_posts(request):
     return Post.objects.all()
 
-@router.get('/{thread_id}',response=PostSchemaOut)
-def get_post_by_thread_id(request,id:str):
-    return Post.objects.get(thread = id)
+
 
 @router.post("/",response=PostSchemaOut)
 def create_post(request,new_post:PostSchemaIn):
