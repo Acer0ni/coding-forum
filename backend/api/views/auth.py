@@ -6,6 +6,7 @@ from api.schemas.user import UserSchemaOut,UserSchemaIn
 from api.models.user import User
 from django.contrib.auth import authenticate,login,logout
 from ninja.errors import HttpError
+from django.views.decorators.csrf import ensure_csrf_cookie
 router = Router(tags=["auth"],auth=None)
 
 @router.post("/login",response=UserSchemaOut,auth=None)
@@ -28,3 +29,8 @@ def user_signup(request,new_user:UserSchemaIn):
     user.save()
     login(request,user)
     return user
+    
+@ensure_csrf_cookie 
+@router.get("/csrf",auth=None)
+def get_csrf(request):
+    return 200,{"msg: it works"}

@@ -1,5 +1,5 @@
 import {useState} from 'react'
-
+import getCookie from '../csrf';
 
 
 function LoginPage(props) {
@@ -8,9 +8,23 @@ function LoginPage(props) {
         password:"password"
     })
   const handleLogin = (e) => {
+    let csrfToken = getCookie("csrftoken")
     e.preventDefault()
-      console.log(`username,${credentials.username},password,${credentials.password}`)
-
+    fetch('/api/auth/login',{
+      method:'POST',
+      credentials: 'include',
+      headers: {
+        'X-CSRFToken':csrfToken,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username:credentials.username,
+        password: credentials.password
+      }),
+    })
+    .then((res)=> res.json())
+    .then((data) => console.log(data))
   };
   const handleChange= (e) =>{
       const value = e.target.value
@@ -30,8 +44,8 @@ function LoginPage(props) {
         }}
       >
         <input value = {credentials.username} onChange={handleChange} type="text" name = "username"></input>
-        <input value = {credentials.password} onChange={handleChange} type="text"name = "password"></input>
-        <button onClick = {handleLogin} ></button>
+        <input value = {credentials.password} onChange={handleChange} type="password"name = "password"></input>
+        <button onClick = {handleLogin} >login</button>
       </form>
     </div>
   );
