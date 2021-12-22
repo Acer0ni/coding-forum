@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get("FORUM_SECRET_KEY", 'django-insecure-cxlmfcn_ys8oa+3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['api']
+ALLOWED_HOSTS = ['api','localhost']
 
 
 # Application definition
