@@ -6,11 +6,11 @@ class PostSchemaOut(ModelSchema):
     class Config:
         model = Post
         model_fields = [
-            'author','thread','created_at','content'
+            'id','author','thread','created_at','content'
         ]
 class PostSchemaIn(ModelSchema):
     class Config:
         model = Post
         model_fields = [
-            'author','thread','content'
+            'thread','content'
         ]

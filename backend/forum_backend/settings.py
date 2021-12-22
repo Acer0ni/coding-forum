@@ -27,6 +27,7 @@ SECRET_KEY = os.environ.get("FORUM_SECRET_KEY", 'django-insecure-cxlmfcn_ys8oa+3
 DEBUG = True
 
 ALLOWED_HOSTS = ['api','localhost']
+CSRF_TRUSTED_ORIGINS =['http://localhost']
 
 
 # Application definition

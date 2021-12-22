@@ -15,5 +15,5 @@ class ThreadSchemaIn(ModelSchema):
     class Config:
         model  = Thread
         model_fields = [
-            "author","title","category",
+            "title","category",
         ]

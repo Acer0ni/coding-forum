@@ -1,0 +1,41 @@
+Flow
+
+IsUserAuthenticated? (GET /api/user/me)
+  Yes
+    ForumComponent (GET /api/categories/)
+      HeaderComponent
+        username (shows user profile page)
+        logout button (POST /api/auth/logout)
+        home button (redirect to react index)
+      CategoriesComponent
+        for category in categories:
+          render CategorySummaryComponent (title, description)
+        User clicks category, gets threads (GET /api/categories/{category_id})
+          for thread in threads:
+            render ThreadSummaryComponent (title, author, date)
+            User clicks thread, gets posts (GET /api/threads/{thread_id})
+              for post in posts:
+                render PostDetailedComponent (author, date, content)
+              NewPostComponent
+                (need to send thread id in here)
+                Content
+                Submit Button (POST /api/post/)
+          NewThreadComponent
+            Title
+            Content
+            Submit Button (POST /api/threads/)
+          
+  No
+    AuthenticationComponent
+      LoginForm (POST /api/auth/login)
+        Username
+        Password
+        Submit button
+      SignUpForm (POST /api/auth/signup)
+        Username
+        Email
+        Password
+        First Name
+        Last Name
+        Submit button
+        

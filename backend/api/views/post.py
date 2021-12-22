@@ -4,6 +4,7 @@ from api.models.post import Post
 from api.models.thread import Thread
 from api.models.user import User
 from api.schemas.post import PostSchemaIn,PostSchemaOut
+from api.schemas.thread import ThreadSchemaOut
 
 router = Router(tags=["posts"])
 
@@ -13,9 +14,8 @@ def get_posts(request):
 
 
 
-@router.post("/",response=PostSchemaOut)
+@router.post("/",response=ThreadSchemaOut)
 def create_post(request,new_post:PostSchemaIn):
-    user = User.objects.get(id=new_post.author)
     current_thread = Thread.objects.get(id = new_post.thread)
-    post = Post.objects.create(thread = current_thread,author= user,content= new_post.content )
+    post = Post.objects.create(thread = current_thread,author= request.user,content= new_post.content )
     return current_thread

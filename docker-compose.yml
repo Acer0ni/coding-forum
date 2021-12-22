@@ -1,0 +1,55 @@
+##################################
+#      DEVELOPMENT USE ONLY      #
+# DO NOT USE THIS IN PRODUCTION! #
+##################################
+version: "3.3"
+services:
+  api:
+    depends_on:
+      - db
+    build:
+      context: ./backend
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./backend/api:/app/api
+      - ./backend/forum_backend:/app/forum_backend
+    environment:
+      - FORUM_DB_HOST=db
+  frontend:
+    depends_on:
+      - api
+    build:
+      context: ./frontend
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./frontend/public:/app/public
+      - ./frontend/src:/app/src
+  nginx:
+    depends_on:
+      - api
+      - frontend
+    image: nginx:latest
+    volumes:
+      - ./conf/dev.nginx.conf:/etc/nginx/nginx.conf
+      - ./logs:/logs
+    ports:
+      - 80:80
+
+  db:
+    image: postgres:14
+    hostname: db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/pgdata
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: forum
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres-data:
+    

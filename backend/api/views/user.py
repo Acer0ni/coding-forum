@@ -10,6 +10,10 @@ router = Router(tags=["user"])
 def get_users(request):
     return User.objects.all()
 
+@router.get("/me",response=UserSchemaOut)
+def get_current_user(request):
+    return request.user
+    
 @router.get("/{id}",response=UserSchemaOut)
 def get_user_by_id(request,id:str):
     return get_object_or_404(User,id=id)
@@ -21,12 +25,7 @@ def get_user_by_id(request,id:str):
 
     # return u
 
-@router.post("/",response=UserSchemaOut)
-def create_user(request,new_user:UserSchemaIn):
-    user = User.objects.create(**new_user.dict())
-    user.set_password(new_user.password)
-    user.save()
-    return user
+
 
 @router.put("/{id}",response=UserSchemaOut)
 def update_user(request,id:str,user:UserSchemaIn):
