@@ -16,6 +16,22 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+settings = {
+    "production":{
+        'debug':False,
+        'allowed_hosts':['api','localhost','forum.pwnschool.org'],
+        'csrf_trusted_origins':['http://forum.pwnschool.org']
+    },
+     "development":{
+        'debug':True,
+        'allowed_hosts':['api','localhost'],
+        'csrf_trusted_origins':['http://localhost']
+    }
+}
+FORUM_ENV = os.environ.get("FORUM_ENV","production")
+
+if FORUM_ENV not in settings.keys():
+    FORUM_ENV = "production"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -24,10 +40,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("FORUM_SECRET_KEY", 'django-insecure-cxlmfcn_ys8oa+33$1xe1)^^6-pkqm-8^@x(%3%cw-ibaipo(^')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = settings.get(FORUM_ENV).get("debug")
 
-ALLOWED_HOSTS = ['api','localhost']
-CSRF_TRUSTED_ORIGINS =['http://localhost']
+ALLOWED_HOSTS = settings.get(FORUM_ENV).get("allowed_hosts")
+CSRF_TRUSTED_ORIGINS = settings.get(FORUM_ENV).get('csrf_trusted_origins')
 
 
 # Application definition
