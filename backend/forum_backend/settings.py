@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-cxlmfcn_ys8oa+33$1xe1)^^6-pkqm-8^@x(%3%cw-ibaipo(^'
+SECRET_KEY = os.environ.get("FORUM_SECRET_KEY", 'django-insecure-cxlmfcn_ys8oa+33$1xe1)^^6-pkqm-8^@x(%3%cw-ibaipo(^')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['api']
 
 
 # Application definition
@@ -77,7 +78,10 @@ WSGI_APPLICATION = 'forum_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'forum',
+        'NAME':os.environ.get("FORUM_DB_NAME",'forum'),
+        'USER':os.environ.get("FORUM_DB_USER",'postgres'),
+        'PASSWORD':os.environ.get("FORUM_DB_PASSWORD",'postgres'),
+        'HOST':os.environ.get("FORUM_DB_HOST",'localhost')
     }
 }
 
