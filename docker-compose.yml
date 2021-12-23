@@ -16,6 +16,7 @@ services:
       - ./backend/forum_backend:/app/forum_backend
     environment:
       - FORUM_DB_HOST=db
+      - FORUM_ENV=development
   frontend:
     depends_on:
       - api
