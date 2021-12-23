@@ -20,7 +20,7 @@ settings = {
     "production":{
         'debug':False,
         'allowed_hosts':['api','localhost','forum.pwnschool.org'],
-        'csrf_trusted_origins':['http://forum.pwnschool.org']
+        'csrf_trusted_origins':['https://forum.pwnschool.org']
     },
      "development":{
         'debug':True,
